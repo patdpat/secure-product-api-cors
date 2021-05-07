@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- VueJS -->
+  <script src="assets/js/vue.js"></script>
+  <!-- Scripts-->
+  <script src="assets/js/axios.min.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <div class="container">
+      Hello {{x}}
+    </div>
+</div>
+<!-- Scripts -->
+<script type="text/javascript">
+  const hsApp = new Vue({
+    el: '#app',
+    data: {
+      x: 1234
+    },    
+    mounted() {
+      console.log('ok')
+      this.get()
+    },
+    methods: {
+      get() {
+        this.isLoading = true
+        axios.post("http://localhost:8091/api/products", 
+        {
+          "name" : "bag",
+          "price" : 800
+        },
+        {
+          headers: {
+            'Authorization': "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkppYzlOVFdlQmIwSFcwQWQ3WnUtUyJ9.eyJpc3MiOiJodHRwczovL2phZGUuanAuYXV0aDAuY29tLyIsInN1YiI6IkhxelJCR05UVGRzeEVwaWE5SngzRkV3TGlZS0JvUXhVQGNsaWVudHMiLCJhdWQiOiJwcm9kdWN0IiwiaWF0IjoxNjE3MjQ3Mzc1LCJleHAiOjE2MTczMzM3NzUsImF6cCI6IkhxelJCR05UVGRzeEVwaWE5SngzRkV3TGlZS0JvUXhVIiwic2NvcGUiOiJyZWFkOnByb2R1Y3RzIGNyZWF0ZTpwcm9kdWN0cyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.E4K41ipTF7dOt1sAtA7RZrHk4YMVfDZLsGLsIwAvtzK_4p2jlUH_OAZMuhzcm9EvV2Y1eQPMN5POSYQpNAn3cgp6xZxAtokbe68vX-0KwKeZGHrrxGK6WZb2Q-djqoNW5N5mni3-SGPdNMpYW1fhUbO0SC295eTz9KVfeUJ5t2EkV60MlTPfkurPIG9jiZyDZVZi1m11qWkStEqyfmeM5cfa7Wq1TqcdkG1X5TjcWTscO2LmjDoMYOHdlZBmdUfMhgnP-JVfd9xMvznBoPgjHpnXJPsL0Dv-BK1enaM1Q0olg9y_bfjwdKhRp3kYiY3VhkcO2V_xS_niE4dJWqTRoA"
+          }
+        })
+        .then(response => {
+          alert(response.data)
+        })
+        .catch(error => {
+            alert('error')
+        })
+      }
+    }
+  })
+</script>
+</body>
+</html>
